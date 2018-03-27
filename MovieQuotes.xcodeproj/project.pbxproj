@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1B3C5377206AA2DC003EF45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C5376206AA2DC003EF45D /* AppDelegate.swift */; };
 		1B3C537A206AA2DC003EF45D /* MovieQuotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C5378206AA2DC003EF45D /* MovieQuotes.xcdatamodeld */; };
-		1B3C537C206AA2DC003EF45D /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C537B206AA2DC003EF45D /* MasterViewController.swift */; };
-		1B3C537E206AA2DC003EF45D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C537D206AA2DC003EF45D /* DetailViewController.swift */; };
 		1B3C5381206AA2DD003EF45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C537F206AA2DD003EF45D /* Main.storyboard */; };
 		1B3C5383206AA2DD003EF45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5382206AA2DD003EF45D /* Assets.xcassets */; };
 		1B3C5386206AA2DD003EF45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */; };
@@ -20,8 +18,6 @@
 		1B3C5373206AA2DC003EF45D /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B3C5376206AA2DC003EF45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B3C5379206AA2DC003EF45D /* MovieQuotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieQuotes.xcdatamodel; sourceTree = "<group>"; };
-		1B3C537B206AA2DC003EF45D /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		1B3C537D206AA2DC003EF45D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1B3C5380206AA2DD003EF45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B3C5382206AA2DD003EF45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B3C5385206AA2DD003EF45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,8 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				1B3C5376206AA2DC003EF45D /* AppDelegate.swift */,
-				1B3C537B206AA2DC003EF45D /* MasterViewController.swift */,
-				1B3C537D206AA2DC003EF45D /* DetailViewController.swift */,
 				1B3C537F206AA2DD003EF45D /* Main.storyboard */,
 				1B3C5382206AA2DD003EF45D /* Assets.xcassets */,
 				1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */,
@@ -144,8 +138,6 @@
 			files = (
 				1B3C5377206AA2DC003EF45D /* AppDelegate.swift in Sources */,
 				1B3C537A206AA2DC003EF45D /* MovieQuotes.xcdatamodeld in Sources */,
-				1B3C537C206AA2DC003EF45D /* MasterViewController.swift in Sources */,
-				1B3C537E206AA2DC003EF45D /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.rosehulman.fengy2.MovieQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -304,7 +296,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.rosehulman.fengy2.MovieQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
