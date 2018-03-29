@@ -12,6 +12,7 @@
 		1B3C5381206AA2DD003EF45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C537F206AA2DD003EF45D /* Main.storyboard */; };
 		1B3C5383206AA2DD003EF45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5382206AA2DD003EF45D /* Assets.xcassets */; };
 		1B3C5386206AA2DD003EF45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */; };
+		1BCE89D4206D367600D8D22B /* MovieQuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		1B3C5382206AA2DD003EF45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B3C5385206AA2DD003EF45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B3C5387206AA2DD003EF45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuotesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */,
 				1B3C5387206AA2DD003EF45D /* Info.plist */,
 				1B3C5378206AA2DC003EF45D /* MovieQuotes.xcdatamodeld */,
+				1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */,
 			);
 			path = MovieQuotes;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B3C5377206AA2DC003EF45D /* AppDelegate.swift in Sources */,
+				1BCE89D4206D367600D8D22B /* MovieQuotesTableViewController.swift in Sources */,
 				1B3C537A206AA2DC003EF45D /* MovieQuotes.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
