@@ -14,7 +14,6 @@
 		1B3C5386206AA2DD003EF45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */; };
 		1BB5F6AF2073D10900AEDB62 /* MovieQuoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB5F6AE2073D10900AEDB62 /* MovieQuoteDetailViewController.swift */; };
 		1BCE89D4206D367600D8D22B /* MovieQuotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */; };
-		1BCE89D6206D394E00D8D22B /* MovieQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCE89D5206D394E00D8D22B /* MovieQuote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		1B3C5387206AA2DD003EF45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BB5F6AE2073D10900AEDB62 /* MovieQuoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuoteDetailViewController.swift; sourceTree = "<group>"; };
 		1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuotesTableViewController.swift; sourceTree = "<group>"; };
-		1BCE89D5206D394E00D8D22B /* MovieQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuote.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +65,6 @@
 				1B3C5387206AA2DD003EF45D /* Info.plist */,
 				1B3C5378206AA2DC003EF45D /* MovieQuotes.xcdatamodeld */,
 				1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */,
-				1BCE89D5206D394E00D8D22B /* MovieQuote.swift */,
 				1BB5F6AE2073D10900AEDB62 /* MovieQuoteDetailViewController.swift */,
 			);
 			path = MovieQuotes;
@@ -147,7 +144,6 @@
 			files = (
 				1B3C5377206AA2DC003EF45D /* AppDelegate.swift in Sources */,
 				1BB5F6AF2073D10900AEDB62 /* MovieQuoteDetailViewController.swift in Sources */,
-				1BCE89D6206D394E00D8D22B /* MovieQuote.swift in Sources */,
 				1BCE89D4206D367600D8D22B /* MovieQuotesTableViewController.swift in Sources */,
 				1B3C537A206AA2DC003EF45D /* MovieQuotes.xcdatamodeld in Sources */,
 			);

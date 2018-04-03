@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieQuotesTableViewController: UITableViewController {
+    var context = (UIApplication.shared.delegate as! AppDelegate)
+        .persistentContainer.viewContext
     
     let movieQuoteCellIdentifier = "MovieQuoteCell"
     let noMovieQuoteCellIdentifier = "NoMovieQuoteCell"
@@ -27,13 +30,11 @@ class MovieQuotesTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(showAddDialog))
-        
-        movieQuotes.append(MovieQuote(quote: "I'll be back", movie: "The Terminator"))
-        movieQuotes.append(MovieQuote(quote: "Yo Adrian!", movie: "Rocky"))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.updateMovieQuoteArray()
         tableView.reloadData()
     }
     
@@ -58,20 +59,43 @@ class MovieQuotesTableViewController: UITableViewController {
         { (action) in
             let quoteTextField = alertController.textFields![0]
             let movieTextField = alertController.textFields![1]
-            let movieQuote = MovieQuote(quote: quoteTextField.text!,
-                                        movie: movieTextField.text!)
-            self.movieQuotes.insert(movieQuote, at:0)
-            if self.movieQuotes.count == 1 {
-                self.tableView.reloadData()
-                self.setEditing(false, animated: true)
-            } else {
-                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-            }
+            
+//            let movieQuote = MovieQuote(quote: quoteTextField.text!,
+//                                        movie: movieTextField.text!)
+//            self.movieQuotes.insert(movieQuote, at:0)
+            let newMovieQuote = MovieQuote(context: self.context)
+            newMovieQuote.quote = quoteTextField.text
+            newMovieQuote.movie = movieTextField.text
+            self.save()
+            self.updateMovieQuoteArray()
+            
+            self.tableView.reloadData()
+//            if self.movieQuotes.count == 1 {
+//                self.tableView.reloadData()
+//                self.setEditing(false, animated: true)
+//            } else {
+//                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+//            }
         }
         
         alertController.addAction(cancelAction)
         alertController.addAction(createQuoteAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func save() {
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    func updateMovieQuoteArray() {
+        // Make a fetch request
+        // Execute the request in a try/catch block
+        let request: NSFetchRequest<MovieQuote> = MovieQuote.fetchRequest()
+        do {
+            movieQuotes = try context.fetch(request)
+        } catch {
+            fatalError("Unresolve Core Data error \(error)")
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
