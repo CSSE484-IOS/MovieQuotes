@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B3C5377206AA2DC003EF45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C5376206AA2DC003EF45D /* AppDelegate.swift */; };
-		1B3C537A206AA2DC003EF45D /* MovieQuotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C5378206AA2DC003EF45D /* MovieQuotes.xcdatamodeld */; };
 		1B3C5381206AA2DD003EF45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C537F206AA2DD003EF45D /* Main.storyboard */; };
 		1B3C5383206AA2DD003EF45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5382206AA2DD003EF45D /* Assets.xcassets */; };
 		1B3C5386206AA2DD003EF45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */; };
@@ -20,7 +19,6 @@
 /* Begin PBXFileReference section */
 		1B3C5373206AA2DC003EF45D /* MovieQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B3C5376206AA2DC003EF45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1B3C5379206AA2DC003EF45D /* MovieQuotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieQuotes.xcdatamodel; sourceTree = "<group>"; };
 		1B3C5380206AA2DD003EF45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B3C5382206AA2DD003EF45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B3C5385206AA2DD003EF45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 				1B3C5382206AA2DD003EF45D /* Assets.xcassets */,
 				1B3C5384206AA2DD003EF45D /* LaunchScreen.storyboard */,
 				1B3C5387206AA2DD003EF45D /* Info.plist */,
-				1B3C5378206AA2DC003EF45D /* MovieQuotes.xcdatamodeld */,
 				1BCE89D3206D367600D8D22B /* MovieQuotesTableViewController.swift */,
 				1BCE89D5206D394E00D8D22B /* MovieQuote.swift */,
 				1BB5F6AE2073D10900AEDB62 /* MovieQuoteDetailViewController.swift */,
@@ -149,7 +146,6 @@
 				1BB5F6AF2073D10900AEDB62 /* MovieQuoteDetailViewController.swift in Sources */,
 				1BCE89D6206D394E00D8D22B /* MovieQuote.swift in Sources */,
 				1BCE89D4206D367600D8D22B /* MovieQuotesTableViewController.swift in Sources */,
-				1B3C537A206AA2DC003EF45D /* MovieQuotes.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,19 +330,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		1B3C5378206AA2DC003EF45D /* MovieQuotes.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				1B3C5379206AA2DC003EF45D /* MovieQuotes.xcdatamodel */,
-			);
-			currentVersion = 1B3C5379206AA2DC003EF45D /* MovieQuotes.xcdatamodel */;
-			path = MovieQuotes.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 1B3C536B206AA2DC003EF45D /* Project object */;
 }
