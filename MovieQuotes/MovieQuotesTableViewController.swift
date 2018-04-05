@@ -66,16 +66,17 @@ class MovieQuotesTableViewController: UITableViewController {
             let newMovieQuote = MovieQuote(context: self.context)
             newMovieQuote.quote = quoteTextField.text
             newMovieQuote.movie = movieTextField.text
+            newMovieQuote.created = Date()
             self.save()
             self.updateMovieQuoteArray()
             
-            self.tableView.reloadData()
-//            if self.movieQuotes.count == 1 {
-//                self.tableView.reloadData()
-//                self.setEditing(false, animated: true)
-//            } else {
-//                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-//            }
+//            self.tableView.reloadData()
+            if self.movieQuotes.count == 1 {
+                self.tableView.reloadData()
+                self.setEditing(false, animated: true)
+            } else {
+                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+            }
         }
         
         alertController.addAction(cancelAction)
@@ -91,6 +92,7 @@ class MovieQuotesTableViewController: UITableViewController {
         // Make a fetch request
         // Execute the request in a try/catch block
         let request: NSFetchRequest<MovieQuote> = MovieQuote.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
         do {
             movieQuotes = try context.fetch(request)
         } catch {
@@ -139,8 +141,12 @@ class MovieQuotesTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            context.delete(movieQuotes[indexPath.row])
+            save()
+            updateMovieQuoteArray()
+            
             // Delete the row from the data source
-            movieQuotes.remove(at: indexPath.row)
+//            movieQuotes.remove(at: indexPath.row)
             if movieQuotes.count == 0 {
                 tableView.reloadData()
             } else {
