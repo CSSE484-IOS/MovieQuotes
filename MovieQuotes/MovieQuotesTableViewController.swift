@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class MovieQuotesTableViewController: UITableViewController {
+    
+    var quoteRef: CollectionReference!
+    var quoteListener: ListenerRegistration!
     
     let movieQuoteCellIdentifier = "MovieQuoteCell"
     let noMovieQuoteCellIdentifier = "NoMovieQuoteCell"
@@ -17,24 +21,72 @@ class MovieQuotesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(showAddDialog))
         
-        movieQuotes.append(MovieQuote(quote: "I'll be back", movie: "The Terminator"))
-        movieQuotes.append(MovieQuote(quote: "Yo Adrian!", movie: "Rocky"))
+        //        movieQuotes.append(MovieQuote(quote: "I'll be back", movie: "The Terminator"))
+        //        movieQuotes.append(MovieQuote(quote: "Yo Adrian!", movie: "Rocky"))
+        quoteRef = Firestore.firestore().collection("quotes")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        quoteListener = quoteRef.order(by: "created", descending: true).limit(to: 50)
+            .addSnapshotListener({ (querySnapshot, error) in
+                guard let snapshot = querySnapshot else {
+                    print("Error fetching quotes.  error: \(error!.localizedDescription)")
+                    return
+                }
+                snapshot.documentChanges.forEach({ (docChange) in
+                    if docChange.type == .added {
+                        print("New quote: \(docChange.document.data())")
+                        self.quoteAdded(docChange.document)
+                    } else if docChange.type == .modified {
+                        print("Modified quote: \(docChange.document.data())")
+                        self.quoteUpdated(docChange.document)
+                    } else if docChange.type == .removed {
+                        print("Removed quote: \(docChange.document.data())")
+                        self.quoteRemoved(docChange.document)
+                    }
+                })
+                self.movieQuotes.sort(by: { (mq1, mq2) -> Bool in
+                    return mq1.created > mq2.created
+                })
+                self.tableView.reloadData()
+            })
+    }
+    
+    func quoteAdded(_ document: DocumentSnapshot) {
+        let newMovieQuote = MovieQuote(documentSnapshot: document)
+        movieQuotes.append(newMovieQuote)
+    }
+    
+    func quoteUpdated(_ document: DocumentSnapshot) {
+        let modifiedMovieQuote = MovieQuote(documentSnapshot: document)
+        for movieQuote in movieQuotes {
+            if movieQuote.id == modifiedMovieQuote.id {
+                movieQuote.quote = modifiedMovieQuote.quote
+                movieQuote.movie = modifiedMovieQuote.movie
+                break
+            }
+        }
+    }
+    
+    func quoteRemoved(_ document: DocumentSnapshot) {
+        for i in 0..<movieQuotes.count {
+            if movieQuotes[i].id == document.documentID {
+                movieQuotes.remove(at: i)
+                break
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        quoteListener.remove()
     }
     
     @objc func showAddDialog() {
@@ -60,13 +112,14 @@ class MovieQuotesTableViewController: UITableViewController {
             let movieTextField = alertController.textFields![1]
             let movieQuote = MovieQuote(quote: quoteTextField.text!,
                                         movie: movieTextField.text!)
-            self.movieQuotes.insert(movieQuote, at:0)
-            if self.movieQuotes.count == 1 {
-                self.tableView.reloadData()
-                self.setEditing(false, animated: true)
-            } else {
-                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-            }
+            self.quoteRef.addDocument(data: movieQuote.data)
+            //            self.movieQuotes.insert(movieQuote, at:0)
+            //            if self.movieQuotes.count == 1 {
+            //                self.tableView.reloadData()
+            //                self.setEditing(false, animated: true)
+            //            } else {
+            //                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+            //            }
         }
         
         alertController.addAction(cancelAction)
@@ -134,9 +187,9 @@ class MovieQuotesTableViewController: UITableViewController {
             // Pass the selected movie quote to the detail view controller.
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
-//                if let detailVC = segue.destination as? MovieQuoteDetailViewController {
-//                    detailVC.movieQuote = movieQuotes[indexPath.row]
-//                }
+                //                if let detailVC = segue.destination as? MovieQuoteDetailViewController {
+                //                    detailVC.movieQuote = movieQuotes[indexPath.row]
+                //                }
             }
         }
     }
