@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MovieQuoteDetailViewController: UIViewController {
     
@@ -14,7 +15,8 @@ class MovieQuoteDetailViewController: UIViewController {
     @IBOutlet weak var movieLabel: UILabel!
     
     var movieQuote: MovieQuote?
-    
+    var movieQuoteRef: DocumentReference?
+    var movieQuoteListener: ListenerRegistration!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,24 +43,42 @@ class MovieQuoteDetailViewController: UIViewController {
                                          style: .cancel,
                                          handler: nil)
         
-        let createQuoteAction = UIAlertAction(title: "Edit",
+        let editQuoteAction = UIAlertAction(title: "Edit",
                                               style: .default)
         { (action) in
             let quoteTextField = alertController.textFields![0]
             let movieTextField = alertController.textFields![1]
             self.movieQuote?.quote = quoteTextField.text!
             self.movieQuote?.movie = movieTextField.text!
-            self.updateView()
+            self.movieQuoteRef?.setData(self.movieQuote!.data)
+//            self.updateView()
         }
         
         alertController.addAction(cancelAction)
-        alertController.addAction(createQuoteAction)
+        alertController.addAction(editQuoteAction)
         present(alertController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidLoad()
-        updateView()
+        super.viewWillAppear(animated)
+//        updateView()
+        movieQuoteListener = movieQuoteRef?.addSnapshotListener({ (documentSnapshot, error) in
+            if let error = error {
+                print("Error getting the document: \(error.localizedDescription)")
+                return
+            }
+            if !documentSnapshot!.exists {
+                print("This document got deleted by someone else")
+                return
+            }
+            self.movieQuote = MovieQuote(documentSnapshot: documentSnapshot!)
+            self.updateView()
+        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        movieQuoteListener.remove()
     }
     
     func updateView() {

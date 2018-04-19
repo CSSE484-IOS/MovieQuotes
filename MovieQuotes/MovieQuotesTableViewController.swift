@@ -34,6 +34,7 @@ class MovieQuotesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        movieQuotes.removeAll()
         quoteListener = quoteRef.order(by: "created", descending: true).limit(to: 50)
             .addSnapshotListener({ (querySnapshot, error) in
                 guard let snapshot = querySnapshot else {
@@ -169,11 +170,13 @@ class MovieQuotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            movieQuotes.remove(at: indexPath.row)
-            if movieQuotes.count == 0 {
-                tableView.reloadData()
-            } else {
-                tableView.deleteRows(at: [indexPath], with: .fade)}
+            let movieQuoteToDelete = movieQuotes[indexPath.row]
+            quoteRef.document(movieQuoteToDelete.id!).delete()
+            //            movieQuotes.remove(at: indexPath.row)
+            //            if movieQuotes.count == 0 {
+            //                tableView.reloadData()
+            //            } else {
+            //                tableView.deleteRows(at: [indexPath], with: .fade)}
         }
     }
     
@@ -186,9 +189,10 @@ class MovieQuotesTableViewController: UITableViewController {
         if segue.identifier == showDetailSegueIdentifier {
             // Pass the selected movie quote to the detail view controller.
             if let indexPath = tableView.indexPathForSelectedRow {
-                (segue.destination as! MovieQuoteDetailViewController).movieQuote = movieQuotes[indexPath.row]
+                (segue.destination as! MovieQuoteDetailViewController).movieQuoteRef = quoteRef.document(movieQuotes[indexPath.row].id!)
+                
                 //                if let detailVC = segue.destination as? MovieQuoteDetailViewController {
-                //                    detailVC.movieQuote = movieQuotes[indexPath.row]
+                //                    detailVC.movieQuoteRef = quoteRef.document(movieQuotes[indexPath.row].id!)
                 //                }
             }
         }
